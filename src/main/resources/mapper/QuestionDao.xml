@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sp.questionnaire.dao.QuestionDao">
+
+    <select id="queryQuestion" resultType="com.sp.questionnaire.entity.Question">
+        SELECT id,
+            paper_id,
+            create_time,
+            question_type,
+            question_title,
+            question_option
+        FROM question
+        ORDER BY create_time ASC
+    </select>
+
+    <select id="queryQusetionByPaperId" resultType="com.sp.questionnaire.entity.Question">
+        SELECT id,
+            paper_id,
+            create_time,
+            question_type,
+            question_title,
+            question_option
+        FROM question
+        WHERE
+        paper_id=#{paperId}
+        ORDER BY question_type ASC
+    </select>
+
+    <select id="queryQuestionById" resultType="com.sp.questionnaire.entity.Question">
+        SELECT id,
+        paper_id,
+        create_time,
+        question_type,
+        question_title,
+        question_option
+        FROM question
+        WHERE
+        id=#{id}
+    </select>
+
+    <insert id="insertQuestion" keyProperty="id" keyColumn="id"
+            parameterType="com.sp.questionnaire.entity.Question">
+        INSERT INTO question(
+            id,
+            paper_id,
+            create_time,
+            question_type,
+            question_title,
+            question_option)
+        VALUES
+        (#{id}, #{paperId},#{createTime}, #{questionType}, #{questionTitle},#{questionOption})
+    </insert>
+
+    <update id="updateQuestion" parameterType="com.sp.questionnaire.entity.Question">
+        UPDATE question
+        <set>
+            <if test="paperId != null">paper_id = #{paperId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="questionType != null">question_type = #{questionType},</if>
+            <if test="questionTitle != null">question_title = #{questionTitle},</if>
+            <if test="questionOption != null">question_option = #{questionOption}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteQuestion">
+        DELETE FROM
+        question
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteQuestionsByPaperId">
+        DELETE FROM
+        question
+        WHERE paper_id = #{paperId}
+    </delete>
+
+
+    <select id="getQuestionsByPaperIdAndQuestionType" resultType="com.sp.questionnaire.entity.Question">
+        SELECT id,
+            paper_id,
+            create_time,
+            question_type,
+            question_title,
+            question_option
+            FROM question
+        WHERE
+        paper_id = #{id} AND question_type = #{questionType}
+         ORDER BY create_time ASC
+    </select>
+
+</mapper>
