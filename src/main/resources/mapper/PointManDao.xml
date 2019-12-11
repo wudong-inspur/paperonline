@@ -8,4 +8,10 @@
 		  VALUES 
 		(#{id}, #{addr}, #{inputUser}, #{inputDate}, #{pointManNo}, #{name}, #{sex}, #{healthy}, #{inCurrentCountry}, #{birthDate}, #{currentAddr}, #{idCardNo}, #{mobilePhone}, #{isOtherPointmanRel}, #{otherPointmanName}, #{otherPointmanRel})
     </insert>
+    
+    <select id="queryPointManByNo" resultType="com.sp.questionnaire.entity.PointMan">
+        SELECT * FROM pointman
+        WHERE
+        pointman_no=#{pointManNo}
+    </select>
 </mapper>

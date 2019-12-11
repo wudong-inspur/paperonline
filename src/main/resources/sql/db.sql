@@ -41,3 +41,21 @@ CREATE TABLE `pointman` (
   `other_pointman_rel` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '与其他指示者具体关系',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Table structure for kinship
+-- ----------------------------
+DROP TABLE IF EXISTS `kinship`;
+CREATE TABLE `kinship` (
+  `id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT 'ID',
+  `pointman_no` varchar(4) COLLATE utf8_bin DEFAULT NULL COMMENT '指示者编号',
+  `kinship_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '关系代码',
+  `kinship_inputcode` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '录入关系代码',
+  `name` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '名称',
+  `sex` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '性别',
+  `birthdate` date DEFAULT NULL COMMENT '出生日期',
+  `idcard_no` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号码',
+  `remark` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `inCountry` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '是否在本村',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

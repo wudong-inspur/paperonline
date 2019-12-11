@@ -57,7 +57,7 @@ public class PointManController {
 			return map;
 		}
 		pm.setId(commonUtils.getUUID());
-
+		
 		if (pointManService.insertPointMan(pm)) { // insert user success
 			map.put("code", 0);
 			map.put("msg", "ok");

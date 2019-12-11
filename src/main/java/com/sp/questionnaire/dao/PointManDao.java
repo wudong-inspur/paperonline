@@ -15,4 +15,12 @@ public interface PointManDao {
 	 * @return the int
 	 */
 	int insertPointMan(PointMan pm);
+
+	/**
+	 * Query point man by no.
+	 *
+	 * @param pointmanNo the pointman no
+	 * @return the list
+	 */
+	PointMan queryPointManByNo(String pointmanNo);
 }

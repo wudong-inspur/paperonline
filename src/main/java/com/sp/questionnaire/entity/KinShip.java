@@ -1,34 +1,34 @@
 package com.sp.questionnaire.entity;
 
-public class KinShip {
-	
+public class Kinship {
+
 	/** 主鍵. */
 	private String id;
-	
-	/** 指示者ID. */
-	private String pointManId;
-	
+
+	/** 指示者代码. */
+	private String pointmanNo;
+
 	/** 亲缘关系代码. */
-	private String kinShipCode;
-	
+	private String kinshipCode;
+
 	/** 亲缘关系录入代码. */
-	private String kinShipInputCode;
-	
+	private String kinshipInputCode;
+
 	/** 名称. */
 	private String name;
-	
+
 	/** 性别. */
 	private String sex;
-	
+
 	/** 出生日期. */
-	private String birthDate;
-	
+	private String birthdate;
+
 	/** 身份证号码. */
-	private String idCardNo;
-	
+	private String idcardNo;
+
 	/** 备注. */
 	private String remark;
-	
+
 	/** 是否在本村. */
 	private boolean inCountry;
 
@@ -40,52 +40,56 @@ public class KinShip {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the pointManId
+	 * @return the pointmanNo
 	 */
-	public String getPointManId() {
-		return pointManId;
+	public String getPointmanNo() {
+		return pointmanNo;
 	}
 
 	/**
-	 * @param pointManId the pointManId to set
+	 * @param pointmanNo
+	 *            the pointmanNo to set
 	 */
-	public void setPointManId(String pointManId) {
-		this.pointManId = pointManId;
+	public void setPointmanNo(String pointmanNo) {
+		this.pointmanNo = pointmanNo;
 	}
 
 	/**
-	 * @return the kinShipCode
+	 * @return the kinshipCode
 	 */
-	public String getKinShipCode() {
-		return kinShipCode;
+	public String getKinshipCode() {
+		return kinshipCode;
 	}
 
 	/**
-	 * @param kinShipCode the kinShipCode to set
+	 * @param kinshipCode
+	 *            the kinshipCode to set
 	 */
-	public void setKinShipCode(String kinShipCode) {
-		this.kinShipCode = kinShipCode;
+	public void setKinshipCode(String kinshipCode) {
+		this.kinshipCode = kinshipCode;
 	}
 
 	/**
-	 * @return the kinShipInputCode
+	 * @return the kinshipInputCode
 	 */
-	public String getKinShipInputCode() {
-		return kinShipInputCode;
+	public String getKinshipInputCode() {
+		return kinshipInputCode;
 	}
 
 	/**
-	 * @param kinShipInputCode the kinShipInputCode to set
+	 * @param kinshipInputCode
+	 *            the kinshipInputCode to set
 	 */
-	public void setKinShipInputCode(String kinShipInputCode) {
-		this.kinShipInputCode = kinShipInputCode;
+	public void setKinshipInputCode(String kinshipInputCode) {
+		this.kinshipInputCode = kinshipInputCode;
 	}
 
 	/**
@@ -96,7 +100,8 @@ public class KinShip {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -110,38 +115,41 @@ public class KinShip {
 	}
 
 	/**
-	 * @param sex the sex to set
+	 * @param sex
+	 *            the sex to set
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
 	/**
-	 * @return the birthDate
+	 * @return the birthdate
 	 */
-	public String getBirthDate() {
-		return birthDate;
+	public String getBirthdate() {
+		return birthdate;
 	}
 
 	/**
-	 * @param birthDate the birthDate to set
+	 * @param birthdate
+	 *            the birthdate to set
 	 */
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 	}
 
 	/**
-	 * @return the idCardNo
+	 * @return the idcardNo
 	 */
-	public String getIdCardNo() {
-		return idCardNo;
+	public String getIdcardNo() {
+		return idcardNo;
 	}
 
 	/**
-	 * @param idCardNo the idCardNo to set
+	 * @param idcardNo
+	 *            the idcardNo to set
 	 */
-	public void setIdCardNo(String idCardNo) {
-		this.idCardNo = idCardNo;
+	public void setIdcardNo(String idcardNo) {
+		this.idcardNo = idcardNo;
 	}
 
 	/**
@@ -152,7 +160,8 @@ public class KinShip {
 	}
 
 	/**
-	 * @param remark the remark to set
+	 * @param remark
+	 *            the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
@@ -166,10 +175,11 @@ public class KinShip {
 	}
 
 	/**
-	 * @param inCountry the inCountry to set
+	 * @param inCountry
+	 *            the inCountry to set
 	 */
 	public void setInCountry(boolean inCountry) {
 		this.inCountry = inCountry;
 	}
-	
+
 }
