@@ -16,7 +16,7 @@ public class MySessionContext {
     /**
      * 用于存放登录过的session
      */
-    private static   Map<String, HttpSession> sessionMap = new HashMap<>();
+    private static   Map<String, HttpSession> sessionMap = new HashMap<String, HttpSession>();
 
     public static synchronized void addSession(HttpSession session) {
         if (session != null) {

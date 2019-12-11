@@ -1,11 +1,8 @@
 package com.sp.questionnaire.web;
 
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sp.questionnaire.entity.Answer;
-import com.sp.questionnaire.entity.Paper;
-import com.sp.questionnaire.entity.Question;
 import com.sp.questionnaire.entity.User;
-import com.sp.questionnaire.entity.view.PaperAnswer;
-import com.sp.questionnaire.entity.view.QuestionAnswer;
-import com.sp.questionnaire.entity.view.ViewPaperQuestion;
-import com.sp.questionnaire.service.AnswerService;
-import com.sp.questionnaire.service.PaperService;
-import com.sp.questionnaire.service.QuestionService;
 import com.sp.questionnaire.service.UserService;
 import com.sp.questionnaire.utils.CommonUtils;
 
@@ -51,15 +38,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private CommonUtils commonUtils;
-
-	@Autowired
-	private PaperService paperService;
-
-	@Autowired
-	private QuestionService questionService;
-
-	@Autowired
-	private AnswerService answerService;
 
 	/**
 	 * <P>
@@ -78,7 +56,7 @@ public class UserController {
 			throws UnsupportedEncodingException, MessagingException {
 		// System.out.println("register: " + request.getSession().getId());
 		// System.out.println(user);
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (result.hasErrors()) {
 			FieldError error = result.getFieldErrors().get(0);// 获得第第一个错误
 			map.put("msg", error.getDefaultMessage());// 将错误信息放入msg
@@ -140,7 +118,7 @@ public class UserController {
 			HttpServletResponse response, @Valid @RequestBody User user,
 			BindingResult result) throws UnsupportedEncodingException {
 		// System.out.println("login: " + request.getSession().getId());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		// System.out.println(user.getEmail());
 		// 登录只需检验email和password
 		if (result.hasErrors()) {
@@ -209,7 +187,7 @@ public class UserController {
 		// System.out.println("logout: ");
 		HttpSession session = (HttpSession) request.getAttribute("session");
 		// System.out.println(session.getId());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (session.getAttribute("admin") != null) {
 			request.removeAttribute("admin");
 			map.put("code", 0);
@@ -250,160 +228,6 @@ public class UserController {
 		} else { // invalid
 			return "invalid";
 		}
-	}
-
-	/**
-	 * 用户答卷
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value = "/api/v1/user/view-paper", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> userViewPaper(String id) throws ParseException {
-		Map<String, Object> map = new HashMap<>();
-		if (id == null) {
-			map.put("code", 2);
-			map.put("msg", "问卷id不能为空");
-		} else {
-			Paper p = paperService.queryPaperByID(id);
-			if (p == null) {
-				map.put("code", 2);
-				map.put("msg", "问卷id无效");
-			} else {
-				// check time for update the status
-				if (p.getStatus() == 0 || p.getStatus() == 1) {
-					if (new Date().after(p.getEndTime())) { // need be over
-						p.setStatus(2);
-						if (paperService.updatePaper(p)) {
-
-						}
-						p.setStatus(2);
-					} else if (new Date().after(p.getStartTime())) { // need be
-																		// start
-						p.setStatus(1);
-						if (paperService.updatePaper(p)) {
-
-						}
-						p.setStatus(1);
-					}
-				}
-				int status = p.getStatus();
-				JSONObject jsonObject = new JSONObject();
-				jsonObject.put("status", status);
-				if (status == 0) { // not start
-					map.put("code", 0);
-					map.put("msg", "该问卷还未开始");
-				} else if (status == 1) { // ing
-					if (new Date().before(p.getStartTime())) {// 已经发布，但是未到开始时间
-						map.put("code", 0);
-						map.put("msg", "该问卷还未开始");
-						jsonObject.put("status", 4);
-						jsonObject.put("title", p.getTitle());
-						jsonObject.put("startTime", commonUtils
-								.getDateStringByDate(p.getStartTime()));
-						jsonObject
-								.put("endTime", commonUtils
-										.getDateStringByDate(p.getEndTime()));
-						map.put("data", jsonObject);
-						return map;
-					}
-					map.put("code", 0);
-					map.put("msg", "ok");
-					jsonObject.put("id", id);
-					jsonObject.put("title", p.getTitle());
-					jsonObject.put("createTime",
-							commonUtils.getLongByDate(p.getCreateTime()));
-					jsonObject.put("startTime",
-							commonUtils.getDateStringByDate(p.getStartTime()));
-					jsonObject.put("endTime",
-							commonUtils.getDateStringByDate(p.getEndTime()));
-
-					// 查出该试卷的问题
-					List<Question> list = questionService
-							.queryQusetionByPaperId(id);
-
-					ArrayList<ViewPaperQuestion> viewPaperQuestionArrayList = new ArrayList<>();
-
-					for (Question q : list) {
-						// 转换question，变成ViewPaperQuestion对象
-						ViewPaperQuestion viewPaperQuestion = new ViewPaperQuestion();
-						viewPaperQuestion.setId(q.getId());
-						viewPaperQuestion.setQuestionType(q.getQuestionType());
-						viewPaperQuestion
-								.setQuestionTitle(q.getQuestionTitle());
-						viewPaperQuestion.setQuestionOption(JSONArray
-								.fromObject(q.getQuestionOption()));
-						viewPaperQuestionArrayList.add(viewPaperQuestion);
-					}
-					JSONArray jsonArray = new JSONArray();
-					jsonArray.addAll(viewPaperQuestionArrayList);
-					jsonObject.put("questions", viewPaperQuestionArrayList);
-
-				} else if (status == 2) { // expired
-					map.put("code", 0);
-					map.put("msg", "问卷已结束");
-					jsonObject.put("title", p.getTitle());
-					jsonObject.put("startTime",
-							commonUtils.getDateStringByDate(p.getStartTime()));
-					jsonObject.put("endTime",
-							commonUtils.getDateStringByDate(p.getEndTime()));
-				} else if (status == 3) { // deleted
-					map.put("code", 0);
-					map.put("msg", "该问卷已被删除");
-				} else { // unknown status
-					map.put("code", 0);
-					map.put("msg", "未知的问卷状态");
-				}
-				map.put("data", jsonObject);
-			}
-
-		}
-		return map;
-
-	}
-
-	/**
-	 * 用户提交问卷答案
-	 * 
-	 * @param answer
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/api/v1/user/commit-paper", method = RequestMethod.POST)
-	public Map<String, Object> userViewPaper(
-			@Valid @RequestBody PaperAnswer answer, BindingResult result) {
-		Map<String, Object> map = new HashMap<>();
-		if (result.hasErrors()) {
-			FieldError error = result.getFieldErrors().get(0);// 获得第第一个错误
-			map.put("msg", error.getDefaultMessage());// 将错误信息放入msg
-			map.put("code", 2);
-			return map;
-		}
-		String paperId = answer.getId();
-		Paper paper = paperService.queryPaperByID(paperId);
-		if (paper != null) {
-			List<Answer> ansList = new ArrayList<>();
-			for (QuestionAnswer qa : answer.getAnswers()) {
-				Answer ans = new Answer();
-				ans.setId(commonUtils.getUUID());
-				ans.setPaperId(paperId);
-				ans.setQuestionId(qa.getId());
-				ans.setQuestionType(qa.getQuestionType());
-				ans.setCreateTime(new Date());
-				JSONArray array = JSONArray.fromObject(qa.getAnswerContent());
-				ans.setAnswerContent(array.toString());
-				ansList.add(ans);
-			}
-			if (answerService.insertAnswerList(ansList)) {
-				map.put("code", 0);
-				map.put("msg", "ok");
-			}
-		} else {
-			map.put("code", 2);
-			map.put("msg", "问卷id无效");
-		}
-		return map;
 	}
 
 }

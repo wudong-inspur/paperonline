@@ -43,7 +43,7 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
     //注册session监听器;
     @Bean
     public ServletListenerRegistrationBean<MySessionListener> servletListenerRegistrationBean() {
-        ServletListenerRegistrationBean<MySessionListener> slrBean = new ServletListenerRegistrationBean<>();
+        ServletListenerRegistrationBean<MySessionListener> slrBean = new ServletListenerRegistrationBean<MySessionListener>();
         slrBean.setListener(new MySessionListener());
         return slrBean;
     }
