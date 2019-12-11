@@ -36,7 +36,7 @@ public class PointMan {
 	private String inCurrentCountry;
 	
 	/** 出生日期. */
-	private String BirthDate;
+	private String birthDate;
 	
 	/** 现住址. */
 	private String currentAddr;
@@ -186,14 +186,14 @@ public class PointMan {
 	 * @return the birthDate
 	 */
 	public String getBirthDate() {
-		return BirthDate;
+		return birthDate;
 	}
 
 	/**
 	 * @param birthDate the birthDate to set
 	 */
 	public void setBirthDate(String birthDate) {
-		BirthDate = birthDate;
+		this.birthDate = birthDate;
 	}
 
 	/**

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sp.questionnaire.dao.PointManDao">
+    <insert id="insertPointMan" keyProperty="id" keyColumn="id" parameterType="com.sp.questionnaire.entity.PointMan">
+		INSERT INTO pointman (id,addr,input_user,input_date,pointman_no,name,sex,healthy,in_current_country,birthdate,current_addr,idcard_no,mobilephone,is_other_pointman_rel,other_pointman_name,other_pointman_rel) 
+		  VALUES 
+		(#{id}, #{addr}, #{inputUser}, #{inputDate}, #{pointManNo}, #{name}, #{sex}, #{healthy}, #{inCurrentCountry}, #{birthDate}, #{currentAddr}, #{idCardNo}, #{mobilePhone}, #{isOtherPointmanRel}, #{otherPointmanName}, #{otherPointmanRel})
+    </insert>
+</mapper>
