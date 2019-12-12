@@ -16,6 +16,6 @@
     </select>
     
     <select id="queryPointmanPaging" parameterType="map" resultType="com.sp.questionnaire.entity.PointMan">
-        select * from pointman limit #{page} , #{pageSize}
+        select * from pointman order by #{field} #{dir} limit #{page} , #{pageSize}
 	</select>
 </mapper>

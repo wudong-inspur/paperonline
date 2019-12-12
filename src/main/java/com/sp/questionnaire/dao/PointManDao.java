@@ -12,34 +12,35 @@ import com.sp.questionnaire.entity.PointMan;
  */
 public interface PointManDao {
 
-	/**
-	 * 插入一条指示者信息.
-	 * 
-	 * @param pm
-	 *            the pm
-	 * @return the int
-	 */
-	int insertPointMan(PointMan pm);
+    /**
+     * 插入一条指示者信息.
+     * 
+     * @param pm
+     *            the pm
+     * @return the int
+     */
+    int insertPointMan(PointMan pm);
 
-	/**
-	 * Query point man by no.
-	 * 
-	 * @param pointmanNo
-	 *            the pointman no
-	 * @return the list
-	 */
-	PointMan queryPointManByNo(String pointmanNo);
+    /**
+     * Query point man by no.
+     * 
+     * @param pointmanNo
+     *            the pointman no
+     * @return the list
+     */
+    PointMan queryPointManByNo(String pointmanNo);
 
-	/**
-	 * Query pointman paging.
-	 * 
-	 * @param currentPage
-	 *            the current page
-	 * @param pageSize
-	 *            the page size
-	 * @return the page list bean
-	 */
-	List<PointMan> queryPointmanPaging(@Param("page")Integer  page, @Param("pageSize")Integer pageSize);
-	
-	List<PointMan> queryPointmanPaging(Map<String, Integer> map);
+    /**
+     * Query pointman paging.
+     * 
+     * @param currentPage
+     *            the current page
+     * @param pageSize
+     *            the page size
+     * @return the page list bean
+     */
+    List<PointMan> queryPointmanPaging(@Param("page") Integer page, @Param("pageSize") Integer pageSize,
+            @Param("field") String field, @Param("dir") String dir);
+
+    List<PointMan> queryPointmanPaging(Map<String, Integer> map);
 }

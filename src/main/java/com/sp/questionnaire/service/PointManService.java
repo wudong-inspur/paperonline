@@ -29,12 +29,12 @@ public interface PointManService {
 
 	/**
 	 * Query pointman paging.
-	 * 
-	 * @param currentPage
-	 *            the current page
-	 * @param pageSize
-	 *            the page size
+	 *
+	 * @param currentPage the current page
+	 * @param pageSize the page size
+	 * @param field the field
+	 * @param dir the dir
 	 * @return the list
 	 */
-	List<PointMan> queryPointmanPaging(int currentPage, int pageSize);
+	List<PointMan> queryPointmanPaging(int currentPage, int pageSize, String field, String dir);
 }
