@@ -2,6 +2,7 @@ package com.sp.questionnaire.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -15,11 +16,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.questionnaire.entity.PointMan;
 import com.sp.questionnaire.service.PointManService;
-import com.sp.questionnaire.utils.CommonUtils;
 
 /*
  * Author: Seven
@@ -31,9 +32,6 @@ public class PointManController {
 
 	@Autowired
 	private PointManService pointManService;
-
-	@Autowired
-	private CommonUtils commonUtils;
 
 	/**
 	 * <P>
@@ -56,8 +54,6 @@ public class PointManController {
 			map.put("code", 2);
 			return map;
 		}
-		pm.setId(commonUtils.getUUID());
-		
 		if (pointManService.insertPointMan(pm)) { // insert user success
 			map.put("code", 0);
 			map.put("msg", "ok");
@@ -69,4 +65,18 @@ public class PointManController {
 		return map;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/api/v1/querypm", method = RequestMethod.GET)
+	public Map<String, Object> addPm(HttpServletRequest request,
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "pageSize", defaultValue = "10") int pageSize)
+			throws UnsupportedEncodingException, MessagingException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<PointMan> pmList = pointManService.queryPointmanPaging(page,
+				pageSize);
+		map.put("code", 0);
+		map.put("msg", "ok");
+		map.put("data", pmList);
+		return map;
+	}
 }

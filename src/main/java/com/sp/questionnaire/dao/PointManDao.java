@@ -1,5 +1,10 @@
 package com.sp.questionnaire.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sp.questionnaire.entity.PointMan;
 
 /**
@@ -18,9 +23,23 @@ public interface PointManDao {
 
 	/**
 	 * Query point man by no.
-	 *
-	 * @param pointmanNo the pointman no
+	 * 
+	 * @param pointmanNo
+	 *            the pointman no
 	 * @return the list
 	 */
 	PointMan queryPointManByNo(String pointmanNo);
+
+	/**
+	 * Query pointman paging.
+	 * 
+	 * @param currentPage
+	 *            the current page
+	 * @param pageSize
+	 *            the page size
+	 * @return the page list bean
+	 */
+	List<PointMan> queryPointmanPaging(@Param("page")Integer  page, @Param("pageSize")Integer pageSize);
+	
+	List<PointMan> queryPointmanPaging(Map<String, Integer> map);
 }

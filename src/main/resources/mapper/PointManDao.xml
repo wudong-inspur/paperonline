@@ -14,4 +14,8 @@
         WHERE
         pointman_no=#{pointManNo}
     </select>
+    
+    <select id="queryPointmanPaging" parameterType="map" resultType="com.sp.questionnaire.entity.PointMan">
+        select * from pointman limit #{page} , #{pageSize}
+	</select>
 </mapper>
