@@ -13,4 +13,10 @@
         WHERE
         pointman_no = #{pointmanNo}
     </select>
+    <delete id="deleteKinship">
+        DELETE FROM
+        kinship
+        WHERE
+        pointman_no = #{pointmanNo}
+    </delete>    
 </mapper>

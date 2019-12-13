@@ -155,4 +155,11 @@ public class CommonUtils {
         }
         return ip;
     }
+    
+    public String convertInt2String(Integer num){
+        if (num < 10){
+            return "0"+num;
+        }
+        return num.toString();
+    }
 }

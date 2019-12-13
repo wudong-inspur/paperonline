@@ -122,4 +122,27 @@ public class PointManController {
         sos.close();
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/api/v1/deletepm", method = RequestMethod.POST)
+    public Map<String, Object> deletePm(HttpServletRequest request, @RequestParam(name = "pmid") String pmid,
+            @Valid @RequestBody PointMan pm, BindingResult result) throws UnsupportedEncodingException,
+            MessagingException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (result.hasErrors()) {
+            FieldError error = result.getFieldErrors().get(0);// 获得第第一个错误
+            map.put("msg", error.getDefaultMessage());// 将错误信息放入msg
+            map.put("code", 2);
+            return map;
+        }
+        if (pointManService.deletePointman(pmid)) { // insert user success
+            map.put("code", 0);
+            map.put("msg", "ok");
+            map.put("data", 0);
+        } else {
+            map.put("code", 1);
+            map.put("msg", "insert database fail");
+        }
+        return map;
+    }
 }

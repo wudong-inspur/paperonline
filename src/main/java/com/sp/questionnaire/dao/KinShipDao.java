@@ -25,4 +25,11 @@ public interface KinShipDao {
 	 * @return the kinship by pointman no
 	 */
 	List<Kinship> getKinshipByPointmanNo(String pointmanNo);
+	
+	/**
+	 * Delete kinship.
+	 *
+	 * @param pointmanNo the pointman no
+	 */
+	int deleteKinship(String pointmanNo);
 }

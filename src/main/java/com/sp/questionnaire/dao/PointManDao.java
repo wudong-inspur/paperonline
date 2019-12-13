@@ -41,5 +41,28 @@ public interface PointManDao {
     List<PointMan> queryPointmanPaging(@Param("page") Integer page, @Param("pageSize") Integer pageSize,
             @Param("field") String field, @Param("dir") String dir);
 
+    /**
+     * Gets the all pointman.
+     * 
+     * @return the all pointman
+     */
     List<PointMan> getAllPointman();
+
+    /**
+     * Delete pointman.
+     * 
+     * @param id
+     *            the id
+     * @return the int
+     */
+    int deletePointman(String id);
+
+    /**
+     * Gets the pointman by id.
+     * 
+     * @param id
+     *            the id
+     * @return the pointman by id
+     */
+    PointMan getPointmanById(String id);
 }

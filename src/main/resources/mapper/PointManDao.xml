@@ -21,5 +21,14 @@
 	
     <select id="getAllPointman" resultType="com.sp.questionnaire.entity.PointMan">
         SELECT * FROM pointman
-    </select>	
+    </select>
+    
+    <select id="getPointmanById" resultType="com.sp.questionnaire.entity.PointMan">
+        SELECT * FROM pointman where id = #{id}
+    </select>
+    <delete id="deletePointman">
+        DELETE FROM
+        pointman
+        WHERE id = #{id}
+    </delete>    
 </mapper>

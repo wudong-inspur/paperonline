@@ -40,5 +40,12 @@ public interface PointManService {
 	 */
 	List<PointMan> queryPointmanPaging(int currentPage, int pageSize, String field, String dir);
 	
+	/**
+	 * Download all datas.
+	 *
+	 * @return the xSSF workbook
+	 */
 	XSSFWorkbook downloadAllDatas();
+	
+	boolean deletePointman(String pmid);
 }
