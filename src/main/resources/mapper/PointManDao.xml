@@ -18,4 +18,8 @@
     <select id="queryPointmanPaging" parameterType="map" resultType="com.sp.questionnaire.entity.PointMan">
         select * from pointman order by #{field} #{dir} limit #{page} , #{pageSize}
 	</select>
+	
+    <select id="getAllPointman" resultType="com.sp.questionnaire.entity.PointMan">
+        SELECT * FROM pointman
+    </select>	
 </mapper>

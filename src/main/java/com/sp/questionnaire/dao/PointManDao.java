@@ -42,5 +42,5 @@ public interface PointManDao {
     List<PointMan> queryPointmanPaging(@Param("page") Integer page, @Param("pageSize") Integer pageSize,
             @Param("field") String field, @Param("dir") String dir);
 
-    List<PointMan> queryPointmanPaging(Map<String, Integer> map);
+    List<PointMan> getAllPointman();
 }

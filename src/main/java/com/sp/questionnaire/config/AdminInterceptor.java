@@ -40,28 +40,13 @@ public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 
-/*
-
-        response.setHeader("Access-Control-Allow-Origin","*");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "36000");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-
-*/
-        //System.out.println("pre: " + request.getSession().getId());
-
-        //System.out.println("hd origin: " + request.getHeader("Origin"));
-
 
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        //response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Allow-Headers"));
         response.setHeader("Access-Control-Allow-Headers", "token,Accept,Origin,XRequestedWith,Content-Type,LastModified");
 
 
         //controller方法调用之前
         String url = request.getRequestURI();
-        //System.out.println("admin preHandler: " + url);
 
         String tokenHeader = request.getHeader("token");
 
@@ -73,12 +58,6 @@ public class AdminInterceptor implements HandlerInterceptor {
                     request.setAttribute("admin", session.getAttribute("admin"));
                     return true;
                 }
-            } else {
-                //TODO
-                //System.out.println(request.getServletPath());
-                //System.out.println(request.getLocalAddr() + request.getContextPath() + "/test");
-                //request.getRequestDispatcher("/test").forward(request,response);
-                //throw new IllegalAccessException("token is expired or not login");
             }
             JSONObject json = new JSONObject();
             json.put("code", -1);

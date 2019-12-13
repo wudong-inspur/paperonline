@@ -2,6 +2,8 @@ package com.sp.questionnaire.service;
 
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.sp.questionnaire.entity.PointMan;
 
 /**
@@ -37,4 +39,6 @@ public interface PointManService {
 	 * @return the list
 	 */
 	List<PointMan> queryPointmanPaging(int currentPage, int pageSize, String field, String dir);
+	
+	XSSFWorkbook downloadAllDatas();
 }

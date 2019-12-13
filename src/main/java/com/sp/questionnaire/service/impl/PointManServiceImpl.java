@@ -1,11 +1,11 @@
 package com.sp.questionnaire.service.impl;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,7 @@ import com.sp.questionnaire.entity.Kinship;
 import com.sp.questionnaire.entity.PointMan;
 import com.sp.questionnaire.service.PointManService;
 import com.sp.questionnaire.utils.CommonUtils;
+import com.sp.questionnaire.utils.DataWriter;
 
 @Service
 public class PointManServiceImpl implements PointManService {
@@ -28,6 +29,9 @@ public class PointManServiceImpl implements PointManService {
 
     @Autowired
     private CommonUtils commonUtils;
+
+    @Autowired
+    private DataWriter dw;
 
     @Transactional
     @Override
@@ -88,18 +92,14 @@ public class PointManServiceImpl implements PointManService {
         return pmDao.queryPointmanPaging(page, pageSize, field, dir);
     }
 
-    public void downloadAllData(){
-        File file = new File ("target/classes/template/template.xlsx");
-        
-    }
-    
-    public static void main(String[] args) {
-        // File file = new File("test");
-        // file.getAbsoluteFile().
-
-        System.out.println(Class.class.getClass().getResource("/").getPath());
-        File file = new File ("target/classes/template/template.xlsx");
-        System.out.println(file.getAbsolutePath());
-        System.out.println(file.isFile());
+    @Override
+    public XSSFWorkbook downloadAllDatas() {
+        List<PointMan> datas = this.pmDao.getAllPointman();
+        try {
+            return dw.writePointman2Excel(datas);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("写入Excel失败");
+        }
     }
 }

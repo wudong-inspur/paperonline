@@ -1,14 +1,18 @@
 package com.sp.questionnaire.web;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.questionnaire.entity.PointMan;
 import com.sp.questionnaire.service.PointManService;
+import com.sp.questionnaire.utils.CommonUtils;
 
 /*
  * Author: Seven
@@ -32,6 +37,9 @@ public class PointManController {
 
     @Autowired
     private PointManService pointManService;
+
+    @Autowired
+    private CommonUtils commonUtils;
 
     /**
      * <P>
@@ -76,6 +84,42 @@ public class PointManController {
         map.put("code", 0);
         map.put("msg", "ok");
         map.put("data", pmList);
+        return map;
+    }
+
+    /**
+     * Export data.
+     * 
+     * @param request
+     *            the request
+     * @param res
+     *            the res
+     * @return the operation result
+     * @throws IOException
+     *             e
+     */
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> exportData(HttpServletRequest request, HttpServletResponse res) throws IOException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "ok");
+        res.setCharacterEncoding("utf-8");
+        XSSFWorkbook wb = this.pointManService.downloadAllDatas();
+        // 响应头
+        res.setContentType("application/x-excel;charset=UTF-8");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Expires", "0");
+        // 文件名用ISO8859_1编码 解决中文文件名编码问题
+        res.setHeader(
+                "Content-Disposition",
+                "attachment; filename=\""
+                        + new String(("导出数据" + commonUtils.getFormatDateTimeNow() + ".xlsx").getBytes(), "ISO8859-1"));
+        ServletOutputStream sos = res.getOutputStream();
+        wb.write(sos);
+        sos.flush();
+        sos.close();
         return map;
     }
 }

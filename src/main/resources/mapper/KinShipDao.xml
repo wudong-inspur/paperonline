@@ -8,5 +8,9 @@
 		  VALUES 
 		(#{id}, #{pointmanNo}, #{kinshipCode}, #{kinshipInputCode}, #{name}, #{sex}, #{birthdate}, #{idcardNo}, #{remark}, #{inCountry})
     </insert>
-    
+        <select id="getKinshipByPointmanNo" resultType="com.sp.questionnaire.entity.Kinship">
+        SELECT * FROM kinship
+        WHERE
+        pointman_no = #{pointmanNo}
+    </select>
 </mapper>
