@@ -97,23 +97,27 @@ public class DataWriter {
             cell3.setCellStyle(css);
             cell3.setCellValue(ks.getKinshipCode());
             
-            XSSFCell cell4 = row.createCell(4);
+            XSSFCell celld = row.createCell(4);
+            celld.setCellStyle(css);
+            celld.setCellValue(ks.getKinshipInputCode());
+            
+            XSSFCell cell4 = row.createCell(5);
             cell4.setCellStyle(css);
             cell4.setCellValue(ks.getName());
             
-            XSSFCell cell5 = row.createCell(5);
+            XSSFCell cell5 = row.createCell(6);
             cell5.setCellStyle(css);
             cell5.setCellValue(ks.getSex());
         
-            XSSFCell cell6 = row.createCell(6);
+            XSSFCell cell6 = row.createCell(7);
             cell6.setCellStyle(css);
             cell6.setCellValue(ks.getBirthdate());
             
-            XSSFCell cell7 = row.createCell(7);
+            XSSFCell cell7 = row.createCell(8);
             cell7.setCellStyle(css);
             cell7.setCellValue(ks.getIdcardNo());
             
-            XSSFCell cell8 = row.createCell(8);
+            XSSFCell cell8 = row.createCell(9);
             cell8.setCellStyle(css);
             cell8.setCellValue(ks.getRemark());
         }
