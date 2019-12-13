@@ -91,27 +91,31 @@ public class DataWriter {
             
             XSSFCell cell2 = row.createCell(2);
             cell2.setCellStyle(css);
-            cell2.setCellValue(ks.isInCountry());
+            cell2.setCellValue(ks.isInCountry() ? "是":"否");
             
             XSSFCell cell3 = row.createCell(3);
             cell3.setCellStyle(css);
-            cell3.setCellValue(ks.getName());
+            cell3.setCellValue(ks.getKinshipCode());
             
             XSSFCell cell4 = row.createCell(4);
             cell4.setCellStyle(css);
-            cell4.setCellValue(ks.getSex());
-        
+            cell4.setCellValue(ks.getName());
+            
             XSSFCell cell5 = row.createCell(5);
             cell5.setCellStyle(css);
-            cell5.setCellValue(ks.getBirthdate());
-            
+            cell5.setCellValue(ks.getSex());
+        
             XSSFCell cell6 = row.createCell(6);
             cell6.setCellStyle(css);
-            cell6.setCellValue(ks.getIdcardNo());
+            cell6.setCellValue(ks.getBirthdate());
             
             XSSFCell cell7 = row.createCell(7);
             cell7.setCellStyle(css);
-            cell7.setCellValue(ks.getRemark());
+            cell7.setCellValue(ks.getIdcardNo());
+            
+            XSSFCell cell8 = row.createCell(8);
+            cell8.setCellStyle(css);
+            cell8.setCellValue(ks.getRemark());
         }
        
     }
