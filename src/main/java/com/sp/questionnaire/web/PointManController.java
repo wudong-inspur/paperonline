@@ -3,7 +3,6 @@ package com.sp.questionnaire.web;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -74,16 +73,19 @@ public class PointManController {
 
     @ResponseBody
     @RequestMapping(value = "/api/v1/querypm", method = RequestMethod.GET)
-    public Map<String, Object> addPm(HttpServletRequest request,
+    public Map<String, Object> listPm(HttpServletRequest request,
             @RequestParam(name = "page", defaultValue = "1") int page,
             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-            @RequestParam(name = "field") String field, @RequestParam(name = "dir", defaultValue = "asc") String dir)
+            @RequestParam(name = "field", defaultValue="name") String field, @RequestParam(name = "dir", defaultValue = "asc") String dir)
             throws UnsupportedEncodingException, MessagingException {
         Map<String, Object> map = new HashMap<String, Object>();
-        List<PointMan> pmList = pointManService.queryPointmanPaging(page, pageSize, field, dir);
+        Map<String, Object> retMap = pointManService.queryPointmanPaging(page, pageSize, field, dir);
         map.put("code", 0);
         map.put("msg", "ok");
-        map.put("data", pmList);
+        map.put("data", retMap.get("data"));
+        map.put("page", page);
+        map.put("pageSize", pageSize);
+        map.put("total", retMap.get("total"));
         return map;
     }
 

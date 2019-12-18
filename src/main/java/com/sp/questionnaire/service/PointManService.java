@@ -1,6 +1,7 @@
 package com.sp.questionnaire.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -38,7 +39,7 @@ public interface PointManService {
 	 * @param dir the dir
 	 * @return the list
 	 */
-	List<PointMan> queryPointmanPaging(int currentPage, int pageSize, String field, String dir);
+	Map<String, Object> queryPointmanPaging(int currentPage, int pageSize, String field, String dir);
 	
 	/**
 	 * Download all datas.

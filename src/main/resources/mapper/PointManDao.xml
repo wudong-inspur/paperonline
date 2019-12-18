@@ -26,9 +26,12 @@
     <select id="getPointmanById" resultType="com.sp.questionnaire.entity.PointMan">
         SELECT * FROM pointman where id = #{id}
     </select>
+    <select id="getPointmanCount" resultType="java.lang.Integer">
+    	SELECT count(1) from pointman
+    </select>
     <delete id="deletePointman">
         DELETE FROM
         pointman
         WHERE id = #{id}
-    </delete>    
+    </delete>  
 </mapper>

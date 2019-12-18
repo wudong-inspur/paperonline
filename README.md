@@ -52,6 +52,7 @@ BODY：
 		"sex": "女",
 		"birthdate": "1994-01-12",
 		"idcardNo": "37108319940112542X",
+        "addr":"XX村",
 		"remark": ""
 	}]
 }

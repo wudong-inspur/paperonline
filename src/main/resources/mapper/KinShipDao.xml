@@ -6,7 +6,7 @@
     <insert id="insertKinShip" keyProperty="id" keyColumn="id" parameterType="com.sp.questionnaire.entity.Kinship">
 		INSERT INTO kinship 
 		  VALUES 
-		(#{id}, #{pointmanNo}, #{kinshipCode}, #{kinshipInputCode}, #{name}, #{sex}, #{birthdate}, #{idcardNo}, #{remark}, #{inCountry})
+		(#{id}, #{pointmanNo}, #{kinshipCode}, #{kinshipInputCode}, #{name}, #{sex}, #{birthdate}, #{idcardNo}, #{addr}, #{remark}, #{inCountry})
     </insert>
         <select id="getKinshipByPointmanNo" resultType="com.sp.questionnaire.entity.Kinship">
         SELECT * FROM kinship

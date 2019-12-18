@@ -117,7 +117,11 @@ public class DataWriter {
             cell7.setCellStyle(css);
             cell7.setCellValue(ks.getIdcardNo());
             
-            XSSFCell cell8 = row.createCell(9);
+            XSSFCell cellAddr = row.createCell(9);
+            cellAddr.setCellStyle(css);
+            cellAddr.setCellValue(ks.getAddr());
+            
+            XSSFCell cell8 = row.createCell(10);
             cell8.setCellStyle(css);
             cell8.setCellValue(ks.getRemark());
         }

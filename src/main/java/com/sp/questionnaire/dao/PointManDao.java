@@ -65,4 +65,7 @@ public interface PointManDao {
      * @return the pointman by id
      */
     PointMan getPointmanById(String id);
+    
+    
+    int getPointmanCount();
 }

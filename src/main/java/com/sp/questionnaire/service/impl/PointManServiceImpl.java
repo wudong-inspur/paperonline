@@ -110,12 +110,17 @@ public class PointManServiceImpl implements PointManService {
     }
 
     @Override
-    public List<PointMan> queryPointmanPaging(int page, int pageSize, String field, String dir) {
+    public Map<String, Object> queryPointmanPaging(int page, int pageSize, String field, String dir) {
         page = (page - 1) * pageSize;
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("page", page);
         map.put("pageSize", pageSize);
-        return pmDao.queryPointmanPaging(page, pageSize, field, dir);
+        int total = pmDao.getPointmanCount();
+        List<PointMan> pmList = pmDao.queryPointmanPaging(page, pageSize, field, dir);
+        Map<String, Object> retMap = new HashMap<String, Object>();
+        retMap.put("total", total);
+        retMap.put("data", pmList);
+        return retMap;
     }
 
     @Override

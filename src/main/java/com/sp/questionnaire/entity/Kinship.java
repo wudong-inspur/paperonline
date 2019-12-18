@@ -25,6 +25,9 @@ public class Kinship {
 
 	/** 身份证号码. */
 	private String idcardNo;
+	
+	/** The addr. */
+	private String addr;
 
 	/** 备注. */
 	private String remark;
@@ -182,4 +185,17 @@ public class Kinship {
 		this.inCountry = inCountry;
 	}
 
+	/**
+	 * @return the addr
+	 */
+	public String getAddr() {
+		return addr;
+	}
+
+	/**
+	 * @param addr the addr to set
+	 */
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 }

@@ -139,7 +139,7 @@ public class UserController {
 		// 校验完毕
 		User user0 = userService.queryUserByUserName(user.getUsername());
 		if (user0 == null) { // no this user
-			map.put("code", 0);
+			map.put("code", 1);
 			map.put("msg", "user is not exists");
 			JSONObject json = new JSONObject();
 			json.put("result", 2);
@@ -171,7 +171,7 @@ public class UserController {
 				}
 				map.put("data", json);
 			} else { // error password
-				map.put("code", 0);
+				map.put("code", 2);
 				map.put("msg", "password error");
 				JSONObject json = new JSONObject();
 				json.put("result", 1);
