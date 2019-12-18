@@ -15,6 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import com.sp.questionnaire.dao.KinShipDao;
@@ -32,6 +34,9 @@ public class DataWriter {
 
     @Autowired
     private KinShipDao kinShipDao;
+    
+    @Autowired
+    ResourceLoader resourceLoader;
 
     /**
      * Write2 excel.
@@ -43,13 +48,12 @@ public class DataWriter {
      *             e
      */
     public XSSFWorkbook writePointman2Excel(List<PointMan> datas) throws Exception {
-        String path = DataWriter.class.getResource("/").getPath();
-        File templateFile = new File(path + "template/template.xlsx");
-
         XSSFWorkbook wb = null;
         try {
-            InputStream input = new FileInputStream(templateFile);
-            wb = new XSSFWorkbook(input);
+        	
+        	 Resource resource = resourceLoader.getResource("classpath:template.xlsx");
+             InputStream is = resource.getInputStream();
+            wb = new XSSFWorkbook(is);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new Exception("写入数据失败");

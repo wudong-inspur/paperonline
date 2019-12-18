@@ -60,3 +60,11 @@ CREATE TABLE `kinship` (
   `inCountry` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '是否在本村',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO user VALUES ('532aea0214144cc89508015de8478682', 'admin', 'AZICOnu9cyUFFvBp3xi1AA==', 'test@m.com', '2019-12-18 12:23:08', null, '0', '6bbae8743898414caf5f9af50fbeb112');
+INSERT INTO user VALUES ('c3abccc11366475db9a9bcfa1446a5c1', 'lvjingjing', 'ixOskI8FV6uZtBiTG2RgMw==', 'test@m.com', '2019-12-10 18:52:49', '2019-12-18 15:44:13', '1', 'b34eb3745acf4cdc9bf822b8a8cddf33');
