@@ -43,7 +43,7 @@ CREATE TABLE `pointman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Table structure for kinship
+-- Table structure for `kinship`
 -- ----------------------------
 DROP TABLE IF EXISTS `kinship`;
 CREATE TABLE `kinship` (
@@ -55,6 +55,7 @@ CREATE TABLE `kinship` (
   `sex` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '性别',
   `birthdate` date DEFAULT NULL COMMENT '出生日期',
   `idcard_no` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号码',
+  `addr` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT '现住址',
   `remark` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   `inCountry` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '是否在本村',
   PRIMARY KEY (`id`)
