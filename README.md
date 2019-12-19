@@ -111,3 +111,11 @@ POST localhost:8050/qs/api/v1/deletepm?pmid=329e303825e540a1854657778b056be3
 | ------ | -------- | ------------------ |
 | pmid   | 指示者ID | 查询的时候会返回id |
 
+
+
+4.下载数据
+
+```javascript
+GET localhost:8050/qs/download
+```
+
