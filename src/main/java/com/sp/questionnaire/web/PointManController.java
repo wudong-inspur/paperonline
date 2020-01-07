@@ -89,6 +89,21 @@ public class PointManController {
         return map;
     }
 
+    
+
+    @ResponseBody
+    @RequestMapping(value = "/api/v1/get", method = RequestMethod.GET)
+    public Map<String, Object> getPm(HttpServletRequest request,
+            @RequestParam(name = "id") String id)
+            throws UnsupportedEncodingException, MessagingException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        PointMan pm = pointManService.queryPointManById(id);
+        map.put("code", 0);
+        map.put("msg", "ok");
+        map.put("data", pm);
+        return map;
+    }
+
     /**
      * Export data.
      * 

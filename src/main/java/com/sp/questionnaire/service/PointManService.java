@@ -1,6 +1,5 @@
 package com.sp.questionnaire.service;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,6 +28,14 @@ public interface PointManService {
 	 * @return the point man
 	 */
 	PointMan queryPointManByNo(String pointmanNo);
+	
+	/**
+	 * Query point man by id.
+	 *
+	 * @param id the id
+	 * @return the point man
+	 */
+	PointMan queryPointManById(String id);
 
 	/**
 	 * Query pointman paging.

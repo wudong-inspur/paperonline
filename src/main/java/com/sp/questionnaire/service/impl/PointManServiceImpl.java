@@ -1,5 +1,6 @@
 package com.sp.questionnaire.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,15 +66,15 @@ public class PointManServiceImpl implements PointManService {
             kinship.setId(commonUtils.getUUID());
             kinship.setPointmanNo(pm.getPointManNo());
             kinship.setInCountry(true);
-            Integer count = countMap.get(kinship.getKinshipCode());
-            if (count == null) {
-                countMap.put(kinship.getKinshipCode(), 1);
-                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
-                        commonUtils.convertInt2String(1)));
-            } else {
-                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
-                        commonUtils.convertInt2String(count)));
-            }
+//            Integer count = countMap.get(kinship.getKinshipCode());
+//            if (count == null) {
+//                countMap.put(kinship.getKinshipCode(), 1);
+//                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
+//                        commonUtils.convertInt2String(1)));
+//            } else {
+//                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
+//                        commonUtils.convertInt2String(count)));
+//            }
             kinShipDao.insertKinShip(kinship);
         }
 
@@ -82,15 +83,15 @@ public class PointManServiceImpl implements PointManService {
             kinship.setId(commonUtils.getUUID());
             kinship.setPointmanNo(pm.getPointManNo());
             kinship.setInCountry(false);
-            Integer count = countMap.get(kinship.getKinshipCode());
-            if (count == null) {
-                countMap.put(kinship.getKinshipCode(), 1);
-                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
-                        commonUtils.convertInt2String(1)));
-            } else {
-                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
-                        commonUtils.convertInt2String(count)));
-            }
+//            Integer count = countMap.get(kinship.getKinshipCode());
+//            if (count == null) {
+//                countMap.put(kinship.getKinshipCode(), 1);
+//                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
+//                        commonUtils.convertInt2String(1)));
+//            } else {
+//                kinship.setKinshipInputCode(getKinshipInputCode(pm.getPointManNo(), kinship.getKinshipCode(),
+//                        commonUtils.convertInt2String(count)));
+//            }
             kinShipDao.insertKinShip(kinship);
         }
         return isSuccess;
@@ -144,4 +145,22 @@ public class PointManServiceImpl implements PointManService {
         int count = pmDao.deletePointman(pmid);
         return count == 1;
     }
+
+	@Override
+	public PointMan queryPointManById(String id) {
+		PointMan pm = this.pmDao.getPointmanById(id);
+		List<Kinship> kinShips = this.kinShipDao.getKinshipByPointmanNo(pm.getPointManNo());
+		List<Kinship> inKinShips = new ArrayList<Kinship>(); 
+		List<Kinship> outKinShips = new ArrayList<Kinship>();
+		for (Kinship ks : kinShips){
+			if (ks.isInCountry()){
+				inKinShips.add(ks);
+			}else{
+				outKinShips.add(ks);
+			}
+		}
+		pm.setInKinShips(inKinShips);
+		pm.setOutKinShips(outKinShips);
+		return pm;
+	}
 }

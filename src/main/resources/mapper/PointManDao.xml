@@ -15,6 +15,12 @@
         pointman_no=#{pointManNo}
     </select>
     
+    <select id="queryPointManById" resultType="com.sp.questionnaire.entity.PointMan">
+        SELECT * FROM pointman
+        WHERE
+        id=#{id}
+    </select>    
+    
     <select id="queryPointmanPaging" parameterType="map" resultType="com.sp.questionnaire.entity.PointMan">
         select * from pointman order by #{field} #{dir} limit #{page} , #{pageSize}
 	</select>

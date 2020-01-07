@@ -30,6 +30,13 @@ public interface PointManDao {
     PointMan queryPointManByNo(String pointmanNo);
 
     /**
+     * Query point man by id.
+     *
+     * @param id the id
+     * @return the point man
+     */
+    PointMan queryPointManById(String id);
+    /**
      * Query pointman paging.
      * 
      * @param currentPage

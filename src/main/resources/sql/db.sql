@@ -1,7 +1,7 @@
 
 
 CREATE DATABASE  `questionnaire` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-
+use questionnaire;
 #用户
 CREATE TABLE  `user` (
  `id` VARCHAR( 64 ) NOT NULL ,
